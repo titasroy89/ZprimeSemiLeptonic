@@ -58,6 +58,16 @@ void ZprimeSemiLeptonicHists::init(){
   m_jet1   = book<TH1F>("m_jet1", "m^{jet 1}", 50, 0, 500);
   m_jet2   = book<TH1F>("m_jet2", "m^{jet 2}", 50, 0, 500);
   m_jet3   = book<TH1F>("m_jet3", "m^{jet 3}", 50, 0, 500);
+  Invmass_jet = book<TH1F>("m_jet", "m^{jets}/H_{T}", 25, 0, 500);
+  Invmass_jet1 = book<TH1F>("m_jet1", "m^{jet 1}/H_{T}", 25, 0, 500);
+  Invmass_jet2 = book<TH1F>("m_jet1", "m^{jet 2}/H_{T}", 25, 0, 500);
+  Invmass_jet3 = book<TH1F>("m_jet1", "m^{jet 3}/H_{T}", 25, 0, 500);
+
+
+  Invpt_jet            = book<TH1F>("Invpt_jet", "p_{T}^{jets}/H_{T}", 9, 9, 9); 
+  Invpt_jet1           = book<TH1F>("Invpt_jet1","Inv p_{T}^{jet 1}/H_{T}", 9, 0, 9); 
+  Invpt_jet2           = book<TH1F>("Invpt_jet2","Inv p_{T}^{jet 2}/H_{T}", 9, 0, 9); 
+  Invpt_jet3           = book<TH1F>("Invpt_jet3","Inv p_{T}^{jet 3}/H_{T}", 9, 0, 9); 
 
   deepjetbscore_jet    = book<TH1F>("deepjetbscore_jet", "DeepJet b-tag score all AK4 jets", 20, 0, 1);
   deepjetbscore_jet1   = book<TH1F>("deepjetbscore_jet1", "DeepJet b-tag score AK4 jet 1", 20, 0, 1);
@@ -70,6 +80,7 @@ void ZprimeSemiLeptonicHists::init(){
   // leptons
   N_mu             = book<TH1F>("N_mu", "N^{#mu}", 11, -0.5, 10.5);
   pt_mu            = book<TH1F>("pt_mu", "p_{T}^{#mu} [GeV]", 90, 0, 900);
+  Invpt_mu          = book<TH1F>("Invpt_mu", "p_{T}^{#mu}/H_{T} ", 20, 0, 10);
   pt_mu1           = book<TH1F>("pt_mu1", "p_{T}^{#mu 1} [GeV]", 90, 0, 900);
   pt_mu2           = book<TH1F>("pt_mu2", "p_{T}^{#mu 2} [GeV]", 90, 0, 900);
   eta_mu           = book<TH1F>("eta_mu", "#eta^{#mu}", 50, -2.5, 2.5);
@@ -87,6 +98,7 @@ void ZprimeSemiLeptonicHists::init(){
 
   N_ele             = book<TH1F>("N_ele", "N^{e}", 11, -0.5, 10.5);
   pt_ele            = book<TH1F>("pt_ele", "p_{T}^{e} [GeV]", 90, 0, 900);
+  Invpt_ele         = book<TH1F>("Invpt_ele", "p_{T}^{e}/H_{T}", 20, 0, 10);
   pt_ele1           = book<TH1F>("pt_ele1", "p_{T}^{e 1} [GeV]", 90, 0, 900);
   pt_ele2           = book<TH1F>("pt_ele2", "p_{T}^{e 2} [GeV]", 90, 0, 900);
   eta_ele           = book<TH1F>("eta_ele", "#eta^{e}", 50, -2.5, 2.5);
@@ -424,10 +436,12 @@ void ZprimeSemiLeptonicHists::init(){
   // general
   NPV           = book<TH1F>("NPV", "number of primary vertices", 91, -0.50, 90.5);
   MET           = book<TH1F>("MET", "missing E_{T} [GeV]", 50, 0, 7000);
+  InvMET        = book<TH1F>("InvMET", "missing E_{T}/H_{T}", 25, 0.05, 0.8);
   MET_rebin     = book<TH1F>("MET_rebin", "missing E_{T} [GeV]", 45, 0, 900);
   MET_rebin2    = book<TH1F>("MET_rebin2", "missing E_{T} [GeV]", 30, 0, 1500);
   MET_rebin3    = book<TH1F>("MET_rebin3", "missing E_{T} [GeV]", 15, 0, 1500);
   ST            = book<TH1F>("ST", "S_{T} [GeV]", 50, 0, 7000);
+  InvST         = book<TH1F>("InvST", "S_{T}/H_{T}", 25, 1.2, 10); 
   ST_rebin      = book<TH1F>("ST_rebin", "S_{T} [GeV]", 200, 0, 5000);
   ST_rebin2     = book<TH1F>("ST_rebin2", "S_{T} [GeV]", 100, 0, 5000);
   ST_rebin3     = book<TH1F>("ST_rebin3", "S_{T} [GeV]", 50, 0, 5000);
@@ -519,6 +533,14 @@ void ZprimeSemiLeptonicHists::init(){
   S22 = book<TH1F>("S22", "S_{22}", 50, 0, 1);
   S23 = book<TH1F>("S23", "S_{23}", 50, 0, 1);
   S33 = book<TH1F>("S33", "S_{33}", 50, 0, 1);
+
+  InvS11 = book<TH1F>("InvS11", "S_{11}", 25, 0, 1);  
+  InvS12 = book<TH1F>("InvS12", "Inv S_{12}", 25, 0, 1);
+  InvS13 = book<TH1F>("Inv S13", "Inv S_{13}", 25, 0, 1);
+  InvS22 = book<TH1F>("Inv S22", "Inv S_{22}", 25, 0, 1);
+  InvS23 = book<TH1F>("Inv S23", "Inv S_{23}", 25, 0, 1);
+  InvS33 = book<TH1F>("Inv S33", "Inv S_{33}", 25, 0, 1);
+
 
   sum_event_weights = book<TH1F>("sum_event_weights", "counting experiment", 1, 0.5, 1.5);
 

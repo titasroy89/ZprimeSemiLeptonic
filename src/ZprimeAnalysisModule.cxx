@@ -462,20 +462,22 @@ bool ZprimeAnalysisModule::process(uhh2::Event& event){
   else if(isdeepAK8){
     TopTaggerDeepAK8->process(event);
   }
-
   fill_histograms(event, "Weights_Init");
+  if(debug) cout << "Done with weights init" << endl;
   lumihists_Weights_Init->fill(event);
-
+  if(debug)   cout<<"done with weights" <<endl;
   if(!HEM_selection->passes(event)){
     if(!isMC) return false;
     else event.weight = event.weight*(1-0.64774715284); // calculated following instructions ar https://twiki.cern.ch/twiki/bin/view/CMS/PdmV2018Analysis
   }
   fill_histograms(event, "Weights_HEM");
-
+  if(debug)   cout<<"done with HEM" <<endl;
   // pileup weight
   PUWeight_module->process(event);
   if(debug) cout << "PUWeight: ok" << endl;
+ 
   fill_histograms(event, "Weights_PU");
+  if(debug)   cout<<"done with PU" <<endl;
   lumihists_Weights_PU->fill(event);
 
   // lumi weight
@@ -483,7 +485,7 @@ bool ZprimeAnalysisModule::process(uhh2::Event& event){
   if(debug) cout << "LumiWeight: ok" << endl;
   fill_histograms(event, "Weights_Lumi");
   lumihists_Weights_Lumi->fill(event);
-
+  if(debug)   cout<<"done with Lumi" <<endl;
   // top pt reweighting
   //TopPtReweight_module->process(event);
   //if(debug) cout << "TopPtReweight: ok" << endl;
@@ -895,6 +897,7 @@ bool ZprimeAnalysisModule::process(uhh2::Event& event){
   if(!AK4PuppiCHS_BTagging->passes(event)) return false;
   fill_histograms(event, "Btags1");
   h_CHSMatchHists_afterBTag->fill(event);
+<<<<<<< HEAD
 
   // Higher order corrections - EWK & QCD NLO
   NLOCorrections_module->process(event);
@@ -904,6 +907,17 @@ bool ZprimeAnalysisModule::process(uhh2::Event& event){
   if(!isEleTriggerMeasurement) sf_ele_trigger->process(event);
   fill_histograms(event, "TriggerEle_SF");
 
+=======
+  // Run top-tagging
+  if(ishotvr){
+     TopTaggerHOTVR->process(event);
+     hadronic_top->process(event);
+     } 
+  else if(isdeepAK8){
+  	TopTaggerDeepAK8->process(event);
+  } 
+  //
+>>>>>>> fixes to NN
 
   // build all possible ttbar candidates
   CandidateBuilder->process(event);
