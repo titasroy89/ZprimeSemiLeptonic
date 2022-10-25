@@ -1,14 +1,14 @@
 #!/bin/bash
 #where UHH2 code installed
-pathGL_code=/nfs/dust/cms/user/deleokse/RunII_106_v2/CMSSW_10_6_28/src/UHH2/
+pathGL_code=/nfs/dust/cms/user/titasroy/uhh2-106X/CMSSW_10_6_28/src/UHH2/
 #where (NOT MERGED) trees after preselection stored
 #path_data=/nfs/dust/cms/group/zprime-uhh/Analysis_UL18/muon/workdir_Zprime_Analysis_UL18_muon/uhh2.AnalysisModuleRunner.
-path_data=/nfs/dust/cms/group/zprime-uhh/Analysis_UL18/electron/workdir_Analysis_UL18_electron/uhh2.AnalysisModuleRunner.
-
+#path_data=/nfs/dust/cms/group/zprime-uhh/Analysis_UL18/electron/workdir_Analysis_UL18_electron/uhh2.AnalysisModuleRunner.
+path_data=/nfs/dust/cms/group/zprime-uhh/Analysis_UL18_QCDNN/muon/workdir_Zprime_Analysis_UL18_muon/uhh2.AnalysisModuleRunner.
 #mkdir $pathGL_code/ZprimeSemiLeptonic/data/Skimming_datasets_UL18_muon/
 #cd $pathGL_code/ZprimeSemiLeptonic/data/Skimming_datasets_UL18_muon/
-mkdir $pathGL_code/ZprimeSemiLeptonic/data/Skimming_datasets_UL18_electron/
-cd $pathGL_code/ZprimeSemiLeptonic/data/Skimming_datasets_UL18_electron/
+mkdir $pathGL_code/ZprimeSemiLeptonic/data/Skimming_datasets_UL18_mu_NN/
+cd $pathGL_code/ZprimeSemiLeptonic/data/Skimming_datasets_UL18_mu_NN/
 
 
 # #MC
@@ -24,8 +24,8 @@ do
 done
 
 # # #DATA
-for sample_name in DATA_EGamma_RunA_UL18 DATA_EGamma_RunB_UL18 DATA_EGamma_RunC_UL18 DATA_EGamma_RunD_UL18
-#for sample_name in DATA_SingleMuon_RunA_UL18 DATA_SingleMuon_RunB_UL18 DATA_SingleMuon_RunC_UL18 DATA_SingleMuon_RunD_UL18
+#for sample_name in DATA_EGamma_RunA_UL18 DATA_EGamma_RunB_UL18 DATA_EGamma_RunC_UL18 DATA_EGamma_RunD_UL18
+for sample_name in DATA_SingleMuon_RunA_UL18 DATA_SingleMuon_RunB_UL18 DATA_SingleMuon_RunC_UL18 DATA_SingleMuon_RunD_UL18
 
 do
     echo $sample_name 

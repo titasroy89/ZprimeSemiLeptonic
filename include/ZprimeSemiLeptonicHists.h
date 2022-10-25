@@ -31,6 +31,9 @@ protected:
 
   TH1F *dR_ele_nearjet, *pt_ele_nearjet;
 
+  TH1F *dphi_mu_jet1, *dphi_ele_jet1, *dphi_mu_Ak8Puppijet1, *dphi_ele_Ak8Puppijet1, *dphi_mu_MET, *dphi_ele_MET, *dphi_jet1_MET;
+  TH1F *Invpt_jet, *Invpt_ele, *Invpt_mu, *Invpt_jet1, *Invpt_jet2, *Invpt_jet3, *InvS11,*InvS12, *InvS13, *InvS22, *InvS23, *InvS33, *InvMET, *InvST, *Invmass_jet, *Invmass_jet1, *Invmass_jet2, *Invmass_jet3;
+
   TH1F *M_mumu, *M_ee, *dRmin_mu_jet, *dRmin_mu_jet_scaled, *dRmin_ele_jet, *dRmin_ele_jet_scaled, *ptrel_mu_jet, *ptrel_ele_jet, *dRmin_mu1_jet, *dRmin_mu1_jet_scaled, *dRmin_ele1_jet, *dRmin_ele1_jet_scaled, *ptrel_mu1_jet, *ptrel_ele1_jet;
 
   TH1F *N_HOTVRjets, *pt_HOTVRjet, *pt_HOTVRjet1, *pt_HOTVRjet2, *pt_HOTVRjet3, *eta_HOTVRjet, *eta_HOTVRjet1, *eta_HOTVRjet2, *eta_HOTVRjet3, *phi_HOTVRjet, *phi_HOTVRjet1, *phi_HOTVRjet2, *phi_HOTVRjet3, *m_HOTVRjet, *m_HOTVRjet1, *m_HOTVRjet2, *m_HOTVRjet3, *N_subjets_HOTVRjet, *N_subjets_HOTVRjet1, *N_subjets_HOTVRjet2, *N_subjets_HOTVRjet3, *N_daughters_HOTVRjet, *N_daughters_HOTVRjet1, *N_daughters_HOTVRjet2, *N_daughters_HOTVRjet3, *dRmin_AK8Puppi_HOTVRjet, *dRmin_AK8Puppi_HOTVRjet1, *dRmin_AK8Puppi_HOTVRjet2, *dRmin_AK8Puppi_HOTVRjet3, *dRmin_mu_HOTVRjet, *dRmin_mu_HOTVRjet1, *dRmin_mu_HOTVRjet2, *dRmin_mu_HOTVRjet3, *tau1_HOTVRjet, *tau1_HOTVRjet1, *tau1_HOTVRjet2, *tau1_HOTVRjet3, *tau2_HOTVRjet, *tau2_HOTVRjet1, *tau2_HOTVRjet2, *tau2_HOTVRjet3, *tau3_HOTVRjet, *tau3_HOTVRjet1, *tau3_HOTVRjet2, *tau3_HOTVRjet3, *tau21_HOTVRjet, *tau21_HOTVRjet1, *tau21_HOTVRjet2, *tau21_HOTVRjet3, *tau32_HOTVRjet, *tau32_HOTVRjet1, *tau32_HOTVRjet2, *tau32_HOTVRjet3;

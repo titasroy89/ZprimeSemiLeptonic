@@ -658,22 +658,22 @@ ZprimeAnalysisModule_applyNN::ZprimeAnalysisModule_applyNN(uhh2::Context& ctx){
   sf_btagging.reset(new MCBTagDiscriminantReweighting(ctx, BTag::algo::DEEPJET, "CHS_matched"));
 
   // set lepton scale factors: see UHH2/common/include/LeptonScaleFactors.h
-  sf_muon_iso_low.reset(new uhh2::MuonIsoScaleFactors(ctx, Muon::Selector::PFIsoTight, Muon::Selector::CutBasedIdTight, true));
-  sf_muon_id_low.reset(new uhh2::MuonIdScaleFactors(ctx, Muon::Selector::CutBasedIdTight, true));
-  sf_muon_id_high.reset(new uhh2::MuonIdScaleFactors(ctx, Muon::Selector::CutBasedIdGlobalHighPt, true));
-  sf_muon_trigger_low.reset(new uhh2::MuonTriggerScaleFactors(ctx, false, true));
-  sf_muon_trigger_high.reset(new uhh2::MuonTriggerScaleFactors(ctx, true, false));
-  sf_muon_reco.reset(new MuonRecoSF(ctx));
-  sf_ele_id_low.reset(new uhh2::ElectronIdScaleFactors(ctx, Electron::tag::mvaEleID_Fall17_iso_V2_wp80, true));
-  sf_ele_id_high.reset(new uhh2::ElectronIdScaleFactors(ctx, Electron::tag::mvaEleID_Fall17_noIso_V2_wp80, true));
-  sf_ele_reco.reset(new uhh2::ElectronRecoScaleFactors(ctx, false, true));
+  //sf_muon_iso_low.reset(new uhh2::MuonIsoScaleFactors(ctx, Muon::Selector::PFIsoTight, Muon::Selector::CutBasedIdTight, true));
+  //sf_muon_id_low.reset(new uhh2::MuonIdScaleFactors(ctx, Muon::Selector::CutBasedIdTight, true));
+  //sf_muon_id_high.reset(new uhh2::MuonIdScaleFactors(ctx, Muon::Selector::CutBasedIdGlobalHighPt, true));
+  //sf_muon_trigger_low.reset(new uhh2::MuonTriggerScaleFactors(ctx, false, true));
+  //sf_muon_trigger_high.reset(new uhh2::MuonTriggerScaleFactors(ctx, true, false));
+  //sf_muon_reco.reset(new MuonRecoSF(ctx));
+  //sf_ele_id_low.reset(new uhh2::ElectronIdScaleFactors(ctx, Electron::tag::mvaEleID_Fall17_iso_V2_wp80, true));
+ // sf_ele_id_high.reset(new uhh2::ElectronIdScaleFactors(ctx, Electron::tag::mvaEleID_Fall17_noIso_V2_wp80, true));
+  //sf_ele_reco.reset(new uhh2::ElectronRecoScaleFactors(ctx, false, true));
 
   // dummies (needed to aviod set value errors)
-  sf_muon_iso_low_dummy.reset(new uhh2::MuonIsoScaleFactors(ctx, boost::none, boost::none, boost::none, boost::none, boost::none, true));
-  sf_muon_id_dummy.reset(new uhh2::MuonIdScaleFactors(ctx, boost::none, boost::none, boost::none, boost::none, true));
-  sf_muon_trigger_dummy.reset(new uhh2::MuonTriggerScaleFactors(ctx, boost::none, boost::none, boost::none, boost::none, boost::none, true));
-  sf_ele_id_dummy.reset(new uhh2::ElectronIdScaleFactors(ctx, boost::none, boost::none, boost::none, boost::none, true));
-  sf_ele_reco_dummy.reset(new uhh2::ElectronRecoScaleFactors(ctx, boost::none, boost::none, boost::none, boost::none, true));
+  //sf_muon_iso_low_dummy.reset(new uhh2::MuonIsoScaleFactors(ctx, boost::none, boost::none, boost::none, boost::none, boost::none, true));
+  //sf_muon_id_dummy.reset(new uhh2::MuonIdScaleFactors(ctx, boost::none, boost::none, boost::none, boost::none, true));
+  //sf_muon_trigger_dummy.reset(new uhh2::MuonTriggerScaleFactors(ctx, boost::none, boost::none, boost::none, boost::none, boost::none, true));
+  //sf_ele_id_dummy.reset(new uhh2::ElectronIdScaleFactors(ctx, boost::none, boost::none, boost::none, boost::none, true));
+  //sf_ele_reco_dummy.reset(new uhh2::ElectronRecoScaleFactors(ctx, boost::none, boost::none, boost::none, boost::none, true));
 
   // Selection modules
   Chi2_selection.reset(new Chi2Cut(ctx, 0., chi2_max));
@@ -1019,61 +1019,61 @@ bool ZprimeAnalysisModule_applyNN::process(uhh2::Event& event){
   }
 
   // apply muon isolation scale factors (low pT only)
-  if(isMuon){
-    if(muon_is_low){
-      sf_muon_iso_low->process(event);
-    }
-    else if(muon_is_high){
-      sf_muon_iso_low_dummy->process(event);
-    }
-    fill_histograms(event, "IsoMuon_SF");
-  }
-  if(isElectron){
-    sf_muon_iso_low_dummy->process(event);
-  }
+  //if(isMuon){
+    //if(muon_is_low){
+     // sf_muon_iso_low->process(event);
+   // }
+    //else if(muon_is_high){
+     // sf_muon_iso_low_dummy->process(event);
+  //  }
+   /// fill_histograms(event, "IsoMuon_SF");
+ // }
+  //if(isElectron){
+   // sf_muon_iso_low_dummy->process(event);
+//  }
   // apply muon id scale factors
-  if(isMuon){
-    if(muon_is_low){
-      sf_muon_id_low->process(event);
-    }
-    else if(muon_is_high){
-      sf_muon_id_high->process(event);
-    }
-    fill_histograms(event, "IdMuon_SF");
-  }
-  if(isElectron){
-    sf_muon_id_dummy->process(event);
-  }
+  //if(isMuon){
+    //if(muon_is_low){
+      //sf_muon_id_low->process(event);
+   // }
+    //else if(muon_is_high){
+      //sf_muon_id_high->process(event);
+   // }
+   // fill_histograms(event, "IdMuon_SF");
+ // }
+  //if(isElectron){
+   // sf_muon_id_dummy->process(event);
+ // }
 
   // apply electron reco scale factors
-  if(isMuon){
-    sf_ele_reco_dummy->process(event);
-  }
-  if(isElectron){
-    sf_ele_reco->process(event);
-    fill_histograms(event, "RecoEle_SF");
-  }
+  //if(isMuon){
+   // sf_ele_reco_dummy->process(event);
+//  }
+  //if(isElectron){
+    //sf_ele_reco->process(event);
+    //fill_histograms(event, "RecoEle_SF");
+ // }
 
   // apply muon reco scale factors
-  sf_muon_reco->process(event);
+ // sf_muon_reco->process(event);
   fill_histograms(event, "MuonReco_SF");
 
 
   // apply lepton trigger scale factors
-  if(isMuon){
-    if(muon_is_low){
-      sf_muon_trigger_low->process(event);
-    }
-    if(muon_is_high){
-      sf_muon_trigger_high->process(event);
-    }
-    fill_histograms(event, "TriggerMuon_SF");
-  }
-  if(isElectron){
+ // if(isMuon){
+   // if(muon_is_low){
+    //  sf_muon_trigger_low->process(event);
+    //}
+   // if(muon_is_high){
+    //  sf_muon_trigger_high->process(event);
+  //  }
+    //fill_histograms(event, "TriggerMuon_SF");
+ // }
+ // if(isElectron){
     // TODO: implement electron trigger SFs (low + high pt)
     // fill_histograms(event, "TriggerEle");
-    sf_muon_trigger_dummy->process(event);
-  }
+   // sf_muon_trigger_dummy->process(event);
+ // }
 
   //Fill histograms before BTagging SF - used to extract Custom BTag SF in (NJets,HT)
   fill_histograms(event, "BeforeBtagSF");
