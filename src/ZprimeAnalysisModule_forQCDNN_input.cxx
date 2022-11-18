@@ -278,7 +278,7 @@ ZprimeAnalysisModule_forQCDNN_input::ZprimeAnalysisModule_forQCDNN_input(uhh2::C
     electron_pt_low = 35.;
   }
   double muon_pt_low(30.);
-  double electron_pt_high(120.);
+  double electron_pt_high(120.);//120.
   double muon_pt_high(55.);
 
   const MuonId muonID_low(AndId<Muon>(PtEtaCut(muon_pt_low, 2.4), muID_low));
@@ -297,8 +297,8 @@ ZprimeAnalysisModule_forQCDNN_input::ZprimeAnalysisModule_forQCDNN_input(uhh2::C
   NEle1_selection.reset(new NElectronSelection(1, 1));
 
   // Important selection values
-  double jet1_pt(50.);
-  double jet2_pt(30.);
+  double jet1_pt(100.);//50
+  double jet2_pt(50.);//30
   double chi2_max(30.);
   string trigger_mu_A, trigger_mu_B, trigger_mu_C, trigger_mu_D, trigger_mu_E, trigger_mu_F;
   string trigger_ele_A, trigger_ele_B;

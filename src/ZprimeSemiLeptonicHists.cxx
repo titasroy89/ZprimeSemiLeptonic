@@ -113,6 +113,15 @@ void ZprimeSemiLeptonicHists::init(){
   reliso_ele_rebin  = book<TH1F>("reliso_ele_rebin", "e rel. Iso", 400, 0, 5);
   reliso_ele1_rebin = book<TH1F>("reliso_ele1_rebin", "e 1 rel. Iso", 400, 0, 5);
   reliso_ele2_rebin = book<TH1F>("reliso_ele2_rebin", "e 2 rel. Iso", 400, 0, 5);
+  pt_ele_lowpt      = book<TH1F>("pt_ele_lowpt", "p_{T}^{e} [GeV] p_{T}<120 GeV", 180, 0, 900);
+  pt_ele_midpt      = book<TH1F>("pt_ele_midpt", "p_{T}^{e} [GeV] 120<p_{T}<200 GeV", 180, 0, 900);
+  pt_ele_highpt     = book<TH1F>("pt_ele_highpt", "p_{T}^{e} [GeV] p_{T}>200 GeV", 180, 0, 900);
+  eta_ele_lowpt     = book<TH1F>("eta_ele_lowpt", "#eta^{e} p_{T}<120 GeV", 50, -2.5, 2.5);
+  eta_ele_midpt     = book<TH1F>("eta_ele_midpt", "#eta^{e} 120<p_{T}<200 GeV", 50, -2.5, 2.5);
+  eta_ele_highpt    = book<TH1F>("eta_ele_highpt", "#eta^{e} p_{T}>200 GeV", 50, -2.5, 2.5);
+  phi_ele_lowpt     = book<TH1F>("phi_ele_lowpt", "#phi^{e} p_{T}<120 GeV", 35, -3.5, 3.5);
+  phi_ele_midpt     = book<TH1F>("phi_ele_midpt", "#phi^{e} 120<p_{T}<200 GeV", 35, -3.5, 3.5);
+  phi_ele_highpt    = book<TH1F>("phi_ele_highpt", "#phi^{e} p_{T}>200 GeV", 35, -3.5, 3.5);
   M_mumu            = book<TH1F>("M_mumu", "M_{#mu#mu} [GeV]",75 , 0, 500);
   M_ee              = book<TH1F>("M_ee", "M_{ee} [GeV]",75 , 0, 500);
 
@@ -540,6 +549,12 @@ void ZprimeSemiLeptonicHists::init(){
   cos_hadtop_thetastar = book<TH1F>("cos_hadtop_thetastar", "cos(hadtop #theta^*)", 100, -1.0, 1.0);
   leptop_thetastar     = book<TH1F>("leptop_thetastar", "leptop #theta^*", 70, -3.5, 3.5);
   cos_leptop_thetastar = book<TH1F>("cos_leptop_thetastar", "cos(leptop #theta^*)", 100, -1.0, 1.0);
+
+  // mttbar histograms from TOP-20-001: https://www.hepdata.net/record/ins1901295
+  vector<float> bins_ditopmass_Fig19 = {250,400,480,560,640,720,800,900,1000,1150,1300,1500,1700,2000,2300,3500};
+  vector<float> bins_ditopmass_Fig25 = {250,420,520,620,800,1000,3500};
+  TOP_20_001_ditopmass_Fig19 = book<TH1F>("TOP_20_001_ditopmass_Fig19","m_{t#bar{t} [GeV]}",bins_ditopmass_Fig19.size()-1,&bins_ditopmass_Fig19[0]);
+  TOP_20_001_ditopmass_Fig25 = book<TH1F>("TOP_20_001_ditopmass_Fig25","m_{t#bar{t} [GeV]}",bins_ditopmass_Fig25.size()-1,&bins_ditopmass_Fig25[0]);
 
   // 2D sitributoin NJets/HT to extract custom btag SF
   N_Jets_vs_HT  = book<TH2F>("N_Jets_vs_HT", "N_Jets_vs_HT", 21, 0., 21., 50, 0., 7000.);
@@ -1213,6 +1228,21 @@ void ZprimeSemiLeptonicHists::fill(const Event & event){
     dRmin_ele_jet_scaled->Fill(electrons->at(i).get_tag(Electron::twodcut_dRmin)*event.jets->at(0).pt(), weight);
     ptrel_ele_jet->Fill(electrons->at(i).get_tag(Electron::twodcut_pTrel), weight);
     dRmin_ptrel_ele->Fill(electrons->at(i).get_tag(Electron::twodcut_dRmin), electrons->at(i).get_tag(Electron::twodcut_pTrel), weight);
+    if(electrons->at(i).pt()<120){
+      pt_ele_lowpt->Fill(electrons->at(i).pt(),weight);
+      eta_ele_lowpt->Fill(electrons->at(i).eta(),weight);
+      phi_ele_lowpt->Fill(electrons->at(i).phi(),weight);
+    }
+    if(electrons->at(i).pt()>=120 && electrons->at(i).pt()<200){
+      pt_ele_midpt->Fill(electrons->at(i).pt(),weight);
+      eta_ele_midpt->Fill(electrons->at(i).eta(),weight);
+      phi_ele_midpt->Fill(electrons->at(i).phi(),weight);
+    }
+    if(electrons->at(i).pt()>=200){
+      pt_ele_highpt->Fill(electrons->at(i).pt(),weight);
+      eta_ele_highpt->Fill(electrons->at(i).eta(),weight);
+      phi_ele_highpt->Fill(electrons->at(i).phi(),weight);
+    }
     if(i==0){
       pt_ele1->Fill(electrons->at(i).pt(),weight);
       eta_ele1->Fill(electrons->at(i).eta(),weight);
@@ -1331,6 +1361,9 @@ void ZprimeSemiLeptonicHists::fill(const Event & event){
     chi2_Zprime->Fill(chi2, weight);
     chi2_Zprime_rebin->Fill(chi2, weight);
     chi2_Zprime_rebin2->Fill(chi2, weight);
+
+    TOP_20_001_ditopmass_Fig19->Fill(Mreco, weight);
+    TOP_20_001_ditopmass_Fig25->Fill(Mreco, weight);
 
     if(BestZprimeCandidate->is_toptag_reconstruction()){
       M_tophad->Fill(BestZprimeCandidate->tophad_topjet_ptr()->v4().M(), weight);
