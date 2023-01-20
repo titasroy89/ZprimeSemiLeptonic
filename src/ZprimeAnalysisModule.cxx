@@ -311,7 +311,7 @@ ZprimeAnalysisModule::ZprimeAnalysisModule(uhh2::Context& ctx){
   hadronic_top.reset(new HadronicTop(ctx));
   // sf_toptag.reset(new HOTVRScaleFactor(ctx, toptagID, ctx.get("Sys_TopTag", "nominal"), "HadronicTop", "TopTagSF", "HOTVRTopTagSFs"));
   NLOCorrections_module.reset(new NLOCorrections(ctx));
-  ps_weights.reset(new PSWeights(ctx));
+  //ps_weights.reset(new PSWeights(ctx));
 
   // b-tagging SFs
   sf_btagging.reset(new MCBTagDiscriminantReweighting(ctx, BTag::algo::DEEPJET, "CHS_matched"));
@@ -507,7 +507,7 @@ bool ZprimeAnalysisModule::process(uhh2::Event& event){
   fill_histograms(event, "Weights_Prefiring");
 
   // Write PSWeights from genInfo to own branch in output tree
-  ps_weights->process(event);
+  //ps_weights->process(event);
   if(debug) cout << "MCScale: ok" << endl;
   fill_histograms(event, "Weights_PS");
   lumihists_Weights_PS->fill(event);
@@ -897,7 +897,6 @@ bool ZprimeAnalysisModule::process(uhh2::Event& event){
   if(!AK4PuppiCHS_BTagging->passes(event)) return false;
   fill_histograms(event, "Btags1");
   h_CHSMatchHists_afterBTag->fill(event);
-<<<<<<< HEAD
 
   // Higher order corrections - EWK & QCD NLO
   NLOCorrections_module->process(event);
@@ -907,7 +906,6 @@ bool ZprimeAnalysisModule::process(uhh2::Event& event){
   if(!isEleTriggerMeasurement) sf_ele_trigger->process(event);
   fill_histograms(event, "TriggerEle_SF");
 
-=======
   // Run top-tagging
   if(ishotvr){
      TopTaggerHOTVR->process(event);
@@ -917,7 +915,6 @@ bool ZprimeAnalysisModule::process(uhh2::Event& event){
   	TopTaggerDeepAK8->process(event);
   } 
   //
->>>>>>> fixes to NN
 
   // build all possible ttbar candidates
   CandidateBuilder->process(event);
