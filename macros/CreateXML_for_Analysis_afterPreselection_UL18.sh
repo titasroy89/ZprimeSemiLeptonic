@@ -1,12 +1,7 @@
 #!/bin/bash
 
 #where UHH2 code installed
-<<<<<<< HEAD
-pathGL_code=/nfs/dust/cms/user/jabuschh/uhh2-106X_v2/CMSSW_10_6_28/src/UHH2/
-=======
 pathGL_code=/nfs/dust/cms/user/titasroy/uhh2-106X/CMSSW_10_6_28/src/UHH2/
->>>>>>> fixes to NN
-#where (NOT MERGED) trees after preselection stored
 #path_data=/nfs/dust/cms/group/zprime-uhh/Presel_UL18/workdir_Preselection_UL18/uhh2.AnalysisModuleRunner.
 path_data=/nfs/dust/cms/group/zprime-uhh/PreselDNN_UL18/workdir_PreselectionDNN_UL18/uhh2.AnalysisModuleRunner.
 mkdir $pathGL_code/ZprimeSemiLeptonic/data/Skimming_datasets_UL18_DNN_preselection
